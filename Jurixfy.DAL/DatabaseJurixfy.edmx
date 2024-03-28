@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="JurixfyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Membresia">
+          <Key>
+            <PropertyRef Name="MembresiaID" />
+          </Key>
+          <Property Name="MembresiaID" Type="int" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Pasword" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="FechaInicioM" Type="datetime" Nullable="false" />
+          <Property Name="FechaFinM" Type="datetime" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="EsAdmin" Type="bit" Nullable="false" />
+          <Property Name="Pago" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Noticia">
+          <Key>
+            <PropertyRef Name="NoticiaID" />
+          </Key>
+          <Property Name="NoticiaID" Type="int" Nullable="false" />
+          <Property Name="NotaDesc" Type="varchar(max)" Nullable="false" />
+          <Property Name="Img" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Urls" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="NomNotica" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pdf">
+          <Key>
+            <PropertyRef Name="PdfID" />
+          </Key>
+          <Property Name="PdfID" Type="int" Nullable="false" />
+          <Property Name="NombrePdf" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Jurixfy.dbo.MembresiaVW' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="MembresiaVW">
+          <Key>
+            <PropertyRef Name="MembresiaID" />
+            <PropertyRef Name="Correo" />
+            <PropertyRef Name="Pasword" />
+            <PropertyRef Name="FechaInicioM" />
+            <PropertyRef Name="FechaFinM" />
+            <PropertyRef Name="Activo" />
+            <PropertyRef Name="EsAdmin" />
+            <PropertyRef Name="Pago" />
+          </Key>
+          <Property Name="MembresiaID" Type="int" Nullable="false" />
+          <Property Name="Correo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Pasword" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FechaInicioM" Type="datetime" Nullable="false" />
+          <Property Name="FechaFinM" Type="datetime" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="EsAdmin" Type="bit" Nullable="false" />
+          <Property Name="Pago" Type="bit" Nullable="false" />
+          <Property Name="DiasFaltantes" Type="int" />
+        </EntityType>
+        <EntityContainer Name="JurixfyModelStoreContainer">
+          <EntitySet Name="Membresia" EntityType="Self.Membresia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Noticia" EntityType="Self.Noticia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pdf" EntityType="Self.Pdf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MembresiaVW" EntityType="Self.MembresiaVW" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MembresiaVW].[MembresiaID] AS [MembresiaID], 
+    [MembresiaVW].[Correo] AS [Correo], 
+    [MembresiaVW].[Pasword] AS [Pasword], 
+    [MembresiaVW].[FechaInicioM] AS [FechaInicioM], 
+    [MembresiaVW].[FechaFinM] AS [FechaFinM], 
+    [MembresiaVW].[Activo] AS [Activo], 
+    [MembresiaVW].[EsAdmin] AS [EsAdmin], 
+    [MembresiaVW].[Pago] AS [Pago], 
+    [MembresiaVW].[DiasFaltantes] AS [DiasFaltantes]
+    FROM [dbo].[MembresiaVW] AS [MembresiaVW]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JurixfyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Membresia">
+          <Key>
+            <PropertyRef Name="MembresiaID" />
+          </Key>
+          <Property Name="MembresiaID" Type="Int32" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pasword" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaInicioM" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFinM" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="EsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="Pago" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Noticia">
+          <Key>
+            <PropertyRef Name="NoticiaID" />
+          </Key>
+          <Property Name="NoticiaID" Type="Int32" Nullable="false" />
+          <Property Name="NotaDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Img" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Urls" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NomNotica" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pdf">
+          <Key>
+            <PropertyRef Name="PdfID" />
+          </Key>
+          <Property Name="PdfID" Type="Int32" Nullable="false" />
+          <Property Name="NombrePdf" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="MembresiaVW">
+          <Key>
+            <PropertyRef Name="MembresiaID" />
+            <PropertyRef Name="Correo" />
+            <PropertyRef Name="Pasword" />
+            <PropertyRef Name="FechaInicioM" />
+            <PropertyRef Name="FechaFinM" />
+            <PropertyRef Name="Activo" />
+            <PropertyRef Name="EsAdmin" />
+            <PropertyRef Name="Pago" />
+          </Key>
+          <Property Name="MembresiaID" Type="Int32" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pasword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaInicioM" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFinM" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="EsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="Pago" Type="Boolean" Nullable="false" />
+          <Property Name="DiasFaltantes" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="JurixfyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Membresia" EntityType="Self.Membresia" />
+          <EntitySet Name="Noticia" EntityType="Self.Noticia" />
+          <EntitySet Name="Pdf" EntityType="Self.Pdf" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="MembresiaVW" EntityType="Self.MembresiaVW" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JurixfyModelStoreContainer" CdmEntityContainer="JurixfyEntities">
+          <EntitySetMapping Name="Membresia">
+            <EntityTypeMapping TypeName="JurixfyModel.Membresia">
+              <MappingFragment StoreEntitySet="Membresia">
+                <ScalarProperty Name="MembresiaID" ColumnName="MembresiaID" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Pasword" ColumnName="Pasword" />
+                <ScalarProperty Name="FechaInicioM" ColumnName="FechaInicioM" />
+                <ScalarProperty Name="FechaFinM" ColumnName="FechaFinM" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="EsAdmin" ColumnName="EsAdmin" />
+                <ScalarProperty Name="Pago" ColumnName="Pago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Noticia">
+            <EntityTypeMapping TypeName="JurixfyModel.Noticia">
+              <MappingFragment StoreEntitySet="Noticia">
+                <ScalarProperty Name="NoticiaID" ColumnName="NoticiaID" />
+                <ScalarProperty Name="NotaDesc" ColumnName="NotaDesc" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Urls" ColumnName="Urls" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="NomNotica" ColumnName="NomNotica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pdf">
+            <EntityTypeMapping TypeName="JurixfyModel.Pdf">
+              <MappingFragment StoreEntitySet="Pdf">
+                <ScalarProperty Name="PdfID" ColumnName="PdfID" />
+                <ScalarProperty Name="NombrePdf" ColumnName="NombrePdf" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="JurixfyModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MembresiaVW">
+            <EntityTypeMapping TypeName="JurixfyModel.MembresiaVW">
+              <MappingFragment StoreEntitySet="MembresiaVW">
+                <ScalarProperty Name="MembresiaID" ColumnName="MembresiaID" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Pasword" ColumnName="Pasword" />
+                <ScalarProperty Name="FechaInicioM" ColumnName="FechaInicioM" />
+                <ScalarProperty Name="FechaFinM" ColumnName="FechaFinM" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="EsAdmin" ColumnName="EsAdmin" />
+                <ScalarProperty Name="Pago" ColumnName="Pago" />
+                <ScalarProperty Name="DiasFaltantes" ColumnName="DiasFaltantes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,178 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Jurixfy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/Content/css/StyleJurixfy.css" rel="stylesheet" />
+    <script src="~/Content/js/Membresia.js"></script>
+    <script src="~/Content/js/Salir.js"></script>
+    <script src="~/Content/js/Usuario.js"></script>
+    <script src="~/Content/js/RecuperarSesion.js"></script>
+    <script src="~/Content/js/Noticiast.js"></script>
+    <script src="~/Content/js/PDF.js"></script>
+    <script src="~/Content/js/PDFUser.js"></script>
+    <script src="~/Content/js/NoticiasUser.js"></script>
+
+    <link rel="shortcut icon" href="~/Content/favicon/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav w-100 justify-content-around">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Ley del Trabajo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Ley del Seguro Social</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Ley Federal de los Trabajadores al Servicio del Estado</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="MembresiaMenu" href="#" data-bs-toggle="modal" data-bs-target="#ModalMembresia">Membresías</a>
+                        </li>
+                        <li id="UltimoMenu" class="nav-item">
+                            <a class="nav-link" href="#">Lo Último</a>
+                        </li>
+                        <li id="PDFMenu" style="display:none" class="nav-item">
+                            <a class="nav-link" href="#">PDF</a>
+                        </li>
+                        <li id="ConfiguracionMenu" style="display:none" class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="configDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Config
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="configDropdown">
+                                <li id="UsuarioMenuSub"><a class="dropdown-item" href="#">Usuarios</a></li>
+                                <li id="PdfMenuSub"><a class="dropdown-item" href="#">PDFs</a></li>
+                                <li id="noticiaMenuSub"><a class="dropdown-item" href="#">Noticias</a></li>
+                            </ul>
+                        </li>
+                        <li id="UsuarioMenu" style="display:none" class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="welcomeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Bienvenido: <span id="SpanUsuarioText"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="welcomeDropdown">
+                                <li><a class="dropdown-item" href="#" id="SalirMenu">Salir</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <main id="mainContent" class="container-fluid">
+        <!-- Contenido de la página -->
+        
+    </main>
+    <footer class="bg-dark text-light py-1">
+        <div class="container text-center">
+            <a href="#"><i class="bi bi-whatsapp footer-icon"></i></a>
+            <a href="#"><i class="bi bi-facebook footer-icon"></i></a>
+            <a href="#"><i class="bi bi-linkedin footer-icon"></i></a>
+            <a href="#"><i class="bi bi-tiktok footer-icon"></i></a>
+            <a href="#"><i class="bi bi-instagram footer-icon"></i></a>
+            <p>© 2024 - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+
+    @*Modal Membresia*@
+
+    <div class="modal fade" id="ModalMembresia" tabindex="-1" aria-labelledby="membresiasModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="membresiasModalLabel">Membresía</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="titleMembresia">Ingrese a su membresía:</p>
+                    <form>
+                        <div class="mb-3">
+                            <label id="labelcorreo" for="correo" class="form-label">Correo electrónico:</label>
+                            <input type="email" class="form-control" id="correo" placeholder="Ingrese su correo electrónico" autocomplete="current-password">
+                        </div>
+                        <div class="mb-3">
+                            <label id="labelcontrasenia" for="contrasenia" class="form-label">Contraseña:</label>
+                            <input type="password" class="form-control" id="contrasenia" placeholder="Ingrese su contraseña" autocomplete="current-password">
+                        </div>
+                        <button type="button" id="ingresarBtn" class="btn btn-primary" disabled>Ingresar</button>
+                    </form>
+                    <div id="mensajeAlerta" class="alert alert-success d-none" role="alert">
+                    </div>
+                    <div id="spinner-container" class="text-center" style="display: none;">
+                        <div id="spinner" class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <p id="preguntalink">¿No tiene una membresía? <a href="#" id="registroLink">Regístrese aquí</a></p>
+                    <p id="IngresaPreguntalink" style="display:none">¿Ya tienes una cuenta? <a href="#" id="ingresaLink">Loguéate aquí</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="btnVolverArriba" class="btn-volver-arriba" style="display: none;">
+        <i class="bi bi-chevron-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            //   ----* Inicia Seccion  NoticiaUser *---   //
+
+            asociarEventosNoticiaUser();
+
+
+            //   ----* Inicia Seccion  PDFUser *---   //
+
+            asociarEventosPDFUser();
+
+            //   ----* Inicia Seccion  PDF *---   //
+
+            asociarEventosPDF();
+
+            //   ----* Inicia Seccion  Noticia *---   //
+
+            asociarEventosNoticia();
+
+            //   ----* Inicia Seccion  Usuario *---   //
+
+            asociarEventosUsuario();
+
+            //   ----* Inicia Seccion  Salir *---   //
+
+            asociarEventosSalir();
+
+            //   ----* Inicia Seccion  Membresia *---   //
+
+            asociarEventosMembresia();
+
+            //   ----* Inicia Seccion  Recuperar Pagina *---   //
+
+            recuperarSesion();
+        });
+    </script>
+</body>
+</html>

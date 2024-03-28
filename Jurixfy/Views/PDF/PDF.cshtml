@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Incrustado</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+    </style>
+    <link rel="shortcut icon" href="~/Content/favicon/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+    <div style="text-align:center">
+        <div id="pdf-viewer" data-pdf-url="@ViewBag.PDFUrl"></div>
+    </div>
+
+    <script>
+        var pdfUrl = $('#pdf-viewer').data('pdf-url');
+
+        function loadPDFViewer(pdfUrl) {
+            const options = {
+                hideDownloadButton: true,
+            };
+
+            pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+                for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
+                    pdf.getPage(pageNumber).then(page => {
+                        const scale = 1.5;
+                        const viewport = page.getViewport({ scale });
+
+                        const canvas = document.createElement('canvas');
+                        const context = canvas.getContext('2d');
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+
+                        const renderContext = {
+                            canvasContext: context,
+                            viewport: viewport,
+                        };
+
+                        document.getElementById('pdf-viewer').appendChild(canvas);
+                        page.render(renderContext);
+                    });
+                }
+            });
+        }
+
+        loadPDFViewer(pdfUrl);
+    </script>
+</body>
+</html>

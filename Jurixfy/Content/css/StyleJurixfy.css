@@ -1,0 +1,108 @@
+﻿body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+main {
+    flex: 1;
+}
+
+.footer-icon {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.total-registros-label {
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.list-group {
+    position: sticky;
+    top: 20px;
+    z-index: 1;
+}
+
+.btn-volver-arriba {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: none;
+    transition: background-color 0.3s;
+}
+
+.bi-arrow-up {
+    font-size: 24px;
+}
+
+.btn-volver-arriba:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+.justifyText {
+    text-align: justify;
+}
+
+.card-img-top {
+    max-width: 100%;
+    height: auto !important;
+    object-fit: cover !important; 
+    max-height: 400px !important; 
+}
+
+/*anterior */
+
+.pdf-list-item {
+    cursor: pointer;
+    position: relative; 
+    transition: transform 0.3s ease;
+}
+
+    .pdf-list-item:hover {
+        transform: scale(1.1);
+    }
+
+.selected {
+    border-right: 4px solid #007bff; 
+}
+
+.pdf-list-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0; 
+    bottom: 0;
+    width: 5px;
+    background-color: #007bff; 
+    display: none; 
+}
+
+.pdf-list-item:hover::after {
+    display: block;
+}
+
+.pdf-list-item i {
+    font-size: 30px; 
+}
+
+.pdf-list-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+}

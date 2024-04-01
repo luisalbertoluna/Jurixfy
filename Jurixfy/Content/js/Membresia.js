@@ -33,6 +33,7 @@ function ocultarValidacion() {
     document.getElementById("labelcontrasenia").style.display = "none";
     document.getElementById("titleMembresia").style.display = "none";
     document.getElementById("ingresarBtn").innerHTML = "Validar";
+    $('#ingresarBtn').prop('disabled', disableBtn);
 }
 
 function ocultarIngresar() {
@@ -45,6 +46,7 @@ function ocultarIngresar() {
     document.getElementById("labelcontrasenia").style.display = "block";
     document.getElementById("titleMembresia").style.display = "block";
     document.getElementById("ingresarBtn").innerHTML = "Ingresar";
+    $('#ingresarBtn').prop('disabled', disableBtn);
 }
 
 function IngresaroValidar() {
